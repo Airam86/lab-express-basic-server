@@ -1,6 +1,6 @@
 // IMPORT PACKAGES
 // Here you should import the required packages for your Express app: `express` and `morgan`
-
+const articles = require("./data/articles.json")
 const projects = require("./data/projects.json");
 const express = require("express");
 const logger = require("morgan")
@@ -15,6 +15,7 @@ const app = express();
 // - `express.static()` to serve static files from the `public` folder
 // - `express.json()` to parse incoming requests with JSON payloads
 // - `morgan` logger to log all incoming requests
+
 app.use(express.static("public"));
 app.use(express.json());
 app.use(logger("dev"));
@@ -31,10 +32,14 @@ app.get("/blog", (req, res) => {
     })
 
 
-    app.get("/api/projects", (req, res) => {
+app.get("/api/projects", (req, res) => {
         res.json(projects);
-        })
+        });
 
+
+app.get("/api/articles", (req, res) => {
+    res.json(articles);
+});
 
 
 // START THE SERVER
